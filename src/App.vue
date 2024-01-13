@@ -1,48 +1,56 @@
 <script setup lang="ts">
+import { reactive, provide } from "vue";
 import { RouterView } from "vue-router";
+import type { Member } from "./interfaces";
+
+const memberList = new Map<number, Member>();
+memberList.set(33456, {
+  id: 33456,
+  name: "田中太郎",
+  email: "bow@example.com",
+  points: 35,
+  note: "初回入会特典あり",
+});
+memberList.set(47783, {
+  id: 47783,
+  name: "鈴木二郎",
+  email: "meu@example.com",
+  points: 53,
+});
+provide("memberList", reactive(memberList));
 </script>
 
 <template>
   <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="./assets/logo.svg"
-      width="125"
-      height="125"
-    />
+    <h1>Vue Router サンプル</h1>
   </header>
-
   <main>
     <RouterView />
   </main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<style>
+main {
+  border: blue 1px solid;
+  padding: 10px;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+#breadcrumbs ul li {
+  display: inline;
+  list-style-type: none;
 }
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+#breadcrumbs {
+  margin-left: 0px;
+}
+#breadcrumbs ul {
+  padding-left: 0px;
+}
+#breadcrumbs ul .current {
+  color: red;
+}
+#breadcrumbs ul li:before {
+  content: " > ";
+}
+#breadcrumbs ul li:first-child:before {
+  content: none;
 }
 </style>
