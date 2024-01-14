@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { inject } from "vue";
+import { computed } from "vue";
 import { RouterLink, RouterView } from "vue-router";
+import { useMemberStore } from "@/stores/member";
 import type { Member } from "@/interfaces";
 
-const memberList = inject("memberList") as Map<number, Member>;
+const memberStore = useMemberStore();
+const memberList = computed((): Map<number, Member> => {
+  return memberStore.memberList;
+});
 </script>
 <template>
   <h1>会員情報</h1>
