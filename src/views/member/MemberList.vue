@@ -5,8 +5,13 @@ import { useMemberStore } from "@/stores/member";
 import type { Member } from "@/interfaces";
 
 const memberStore = useMemberStore();
+memberStore.prepareMemberList();
+
 const memberList = computed((): Map<number, Member> => {
   return memberStore.memberList;
+});
+const isEmptyList = computed((): boolean => {
+  return memberStore.isMemberListEmpty;
 });
 </script>
 <template>
@@ -26,6 +31,7 @@ const memberList = computed((): Map<number, Member> => {
       >から
     </p>
     <ul>
+      <li v-if="isEmptyList">会員情報は存在しません。</li>
       <li v-for="[id, member] in memberList" :key="id">
         <RouterLink :to="{ name: 'MemberDetail', params: { id: id } }">
           IDが{{ id }}の{{ member.name }}さん
