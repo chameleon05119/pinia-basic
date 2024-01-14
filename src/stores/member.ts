@@ -36,5 +36,8 @@ export const useMemberStore = defineStore({
         points: 53,
       });
     },
+    addMember(member: Member): void {
+      this.memberList.set(member.id, member);
+    },
   },
 });
