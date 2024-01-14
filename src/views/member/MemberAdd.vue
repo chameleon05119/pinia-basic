@@ -15,7 +15,7 @@ const member: Member = reactive({
 });
 
 const onAdd = (): void => {
-  memberStore.addMember(member);
+  memberStore.insertMember(member);
   router.push({
     name: "MemberDetail",
     params: {
