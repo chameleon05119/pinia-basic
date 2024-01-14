@@ -12,7 +12,14 @@ export const useMemberStore = defineStore({
       memberList: new Map<number, Member>(),
     };
   },
-  getters: {},
+  getters: {
+    getById: (state) => {
+      return (id: number): Member => {
+        const member = state.memberList.get(id) as Member;
+        return member;
+      };
+    },
+  },
   actions: {
     initList(): void {
       this.memberList.set(33456, {
