@@ -19,6 +19,9 @@ export const useMemberStore = defineStore({
         return member;
       };
     },
+    isMemberListEmpty: (state): boolean => {
+      return state.memberList.size == 0;
+    },
   },
   actions: {
     // sessionStorage内に保存された会員情報で初期化するaction
