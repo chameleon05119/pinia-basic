@@ -11,7 +11,7 @@ import { RouterLink } from "vue-router";
   </nav>
   <section>
     <p>
-      <RouterLink :to="{ name: 'MemberList' }"> 会員登録はこちら </RouterLink>
+      <RouterLink :to="{ name: 'MemberList' }"> 会員リスト </RouterLink>
     </p>
   </section>
 </template>
