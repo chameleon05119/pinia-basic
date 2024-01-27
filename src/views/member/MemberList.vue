@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, ref, reactive, watch } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import { useMemberStore } from "@/stores/member";
 import type { Member } from "@/interfaces";
@@ -14,6 +14,13 @@ memberStore.prepareMemberList();
 
 const userInputText = ref("");
 const suggestedText = ref("");
+
+const refObj = ref({
+  count: 0,
+});
+const reactiveObj = reactive({
+  count: 0,
+});
 
 const memberList = computed((): Map<number, Member> => {
   return memberStore.memberList;
@@ -39,11 +46,17 @@ const separateText = (text: string): SplitText => {
   return splitText;
 };
 
+setInterval(() => {
+  refObj.value.count++;
+}, 1000);
+
 watch(userInputText, () => {
   suggestedText.value = fetchSuggestedText(userInputText.value);
 });
 </script>
 <template>
+  <h2>ref() vs reactive()</h2>
+  <p>refObj.count = {{ refObj.count }}</p>
   <h2>サジェストテスト</h2>
   <input type="text" v-model="userInputText" />
   <span v-text="displaySuggestedText.forwardText" class="forward-text" />
